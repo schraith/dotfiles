@@ -32,7 +32,7 @@ After backing up your old Mac you may now follow these install instructions to s
 3. Clone this repo to `~/.dotfiles` with:
 
     ```zsh
-    git clone --recursive git@github.com:schraith/dotfiles-preferred.git ~/.dotfiles
+    git clone --recursive git@github.com:schraith/dotfiles.git ~/.dotfiles
     ```
 
 4. Run the installation with:
