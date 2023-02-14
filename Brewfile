@@ -3,7 +3,6 @@ tap 'homebrew/cask'
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 tap 'homebrew/bundle'
-tap 'nicoverbruggen/homebrew-cask'
 
 # Binaries
 brew 'bash' # Latest Bash version
@@ -20,9 +19,7 @@ brew 'php'
 brew 'php@8.0'
 brew 'composer'
 brew 'imagemagick'
-brew 'meilisearch'
 brew 'mysql'
-brew 'nginx'
 brew 'node'
 brew 'redis'
 brew 'yarn'
