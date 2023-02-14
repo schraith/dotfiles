@@ -44,6 +44,7 @@ cask 'grandperspective'
 cask 'obsidian'
 cask 'path-finder'
 cask 'raycast'
+cask 'shottr'
 cask 'slack'
 cask 'steam'
 cask 'superhuman'
@@ -70,7 +71,7 @@ cask 'font-source-sans-pro'
 cask 'font-source-serif-pro'
 
 # Mac App Store
+mas 'Dato', id: 1470584107
+mas 'Drafts', id: 1435957248
 mas 'Speedtest', id: 1153157709
 mas 'Things', id: 904280696
-mas 'Drafts', id: 1435957248
-
