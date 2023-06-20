@@ -1,8 +1,24 @@
 # Path to your dotfiles.
-export DOTFILES=$HOME/Projects/dotfiles
+export DOTFILES=$HOME/.dotfiles
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Use the correct Java version for FactorLab
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+
+# CATALINA_OPTS to set java options for Tomcat
+export CATALINA_OPTS="-Xss8m -Dcom.sun.net.ssl.enableECC=false \
+ -Djavax.net.ssl.keyStoreType=JKS \
+ -Djavax.net.ssl.keyStore=/Users/kevinschraith/FactorLab/factorlab-server/.truststore/tomcatkeys.jks \
+ -Djavax.net.ssl.keyStorePassword=changeit \
+ -Djavax.net.ssl.trustStoreType=JKS \
+ -Djavax.net.ssl.trustStore=/Users/kevinschraith/FactorLab/factorlab-server/.truststore/tomcatcerts.jks \
+ -Djavax.net.ssl.trustStorePassword=changeit"
+
+# NVM Setup
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
