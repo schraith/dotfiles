@@ -31,6 +31,7 @@ brew 'romkatv/powerlevel10k/powerlevel10k'
 # Apps
 cask '1password'
 cask '1password-cli'
+cask 'alt-tab'
 cask 'anki'
 cask 'arc'
 cask 'backblaze'

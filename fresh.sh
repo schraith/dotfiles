@@ -21,6 +21,10 @@ fi
 rm -rf $HOME/.zshrc
 ln -s $DOTFILES/.zshrc $HOME/.zshrc
 
+# Remove .p10k.zsh from $HOM$ (if it exists) and symlink into .dotfiles directory
+rm -rf $HOME/.p10k.zsh
+ln -s $DOTFILES/.p10k.zsh $HOME/.p10k.zsh
+
 # Update Homebrew recipes
 brew update
 
