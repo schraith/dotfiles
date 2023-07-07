@@ -112,6 +112,12 @@ source $ZSH/oh-my-zsh.sh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# 1Password CLI settings
+export OP_BIOMETRIC_UNLOCK_ENABLED=true
+export OP_ACCOUNT=Factorlab
+export OP_PLUGIN_ALIASES_SOURCED=1
+alias aws="op plugin run -- aws"
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
