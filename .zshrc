@@ -11,22 +11,6 @@ export DOTFILES=$HOME/.dotfiles
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Use the correct Java version for FactorLab
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
-
-# CATALINA_OPTS to set java options for Tomcat
-export CATALINA_OPTS="-Xss8m -Dcom.sun.net.ssl.enableECC=false \
- -Djavax.net.ssl.keyStoreType=JKS \
- -Djavax.net.ssl.keyStore=/Users/kevinschraith/FactorLab/factorlab-server/.truststore/tomcatkeys.jks \
- -Djavax.net.ssl.keyStorePassword=changeit \
- -Djavax.net.ssl.trustStoreType=JKS \
- -Djavax.net.ssl.trustStore=/Users/kevinschraith/FactorLab/factorlab-server/.truststore/tomcatcerts.jks \
- -Djavax.net.ssl.trustStorePassword=changeit"
-
-# NVM Setup
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -39,7 +23,7 @@ export MNML_RPROMPT=('mnml_cwd 20')
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="minimal"
+# ZSH_THEME="minimal"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -112,12 +96,6 @@ source $ZSH/oh-my-zsh.sh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# 1Password CLI settings
-export OP_BIOMETRIC_UNLOCK_ENABLED=true
-export OP_ACCOUNT=Factorlab
-export OP_PLUGIN_ALIASES_SOURCED=1
-alias aws="op plugin run -- aws"
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -127,6 +105,34 @@ alias aws="op plugin run -- aws"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+# NVM Setup
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# Use the correct Java version for FactorLab
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+
+# CATALINA_OPTS to set java options for Tomcat
+export CATALINA_OPTS="-Xss8m -Dcom.sun.net.ssl.enableECC=false \
+ -Djavax.net.ssl.keyStoreType=JKS \
+ -Djavax.net.ssl.keyStore=/Users/kevinschraith/FactorLab/factorlab-server/.truststore/tomcatkeys.jks \
+ -Djavax.net.ssl.keyStorePassword=changeit \
+ -Djavax.net.ssl.trustStoreType=JKS \
+ -Djavax.net.ssl.trustStore=/Users/kevinschraith/FactorLab/factorlab-server/.truststore/tomcatcerts.jks \
+ -Djavax.net.ssl.trustStorePassword=changeit"
+
+# 1Password CLI settings
+export OP_BIOMETRIC_UNLOCK_ENABLED=true
+export OP_ACCOUNT=Factorlab
+export OP_PLUGIN_ALIASES_SOURCED=1
+alias aws="op plugin run -- aws"
+
+# Safeway Coupons - custom values for processing
+export SAFEWAY_ACCOUNT_USERNAME="schraith@yahoo.com"
+export SAFEWAY_ACCOUNT_PASSWORD="TMJ3dzq-ugn9baz!tdf"
+export SAFEWAY_ACCOUNT_MAIL_FROM="schraith@gmail.com"
+export SAFEWAY_ACCOUNT_MAIL_TO="schraith@gmail.com"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -138,7 +144,7 @@ alias aws="op plugin run -- aws"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source $DOTFILES/aliases.zsh
 
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/opt/powerlevel10k/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
