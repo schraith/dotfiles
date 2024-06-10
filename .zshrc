@@ -8,9 +8,6 @@ fi
 # Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -128,11 +125,8 @@ export OP_ACCOUNT=Factorlab
 export OP_PLUGIN_ALIASES_SOURCED=1
 alias aws="op plugin run -- aws"
 
-# Safeway Coupons - custom values for processing
-export SAFEWAY_ACCOUNT_USERNAME="schraith@yahoo.com"
-export SAFEWAY_ACCOUNT_PASSWORD="TMJ3dzq-ugn9baz!tdf"
-export SAFEWAY_ACCOUNT_MAIL_FROM="schraith@gmail.com"
-export SAFEWAY_ACCOUNT_MAIL_TO="schraith@gmail.com"
+# Set private environment variables, which should not be included in source control
+[[ ! -f ~/.private.zsh ]] || source ~/.private.zsh 
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -148,3 +142,7 @@ source /opt/homebrew/opt/powerlevel10k/share/powerlevel10k/powerlevel10k.zsh-the
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
