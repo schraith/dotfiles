@@ -108,7 +108,7 @@ export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 
 # Use the correct Java version for FactorLab
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home
 
 # CATALINA_OPTS to set java options for Tomcat
 export CATALINA_OPTS="-Xss8m -Dcom.sun.net.ssl.enableECC=false \
