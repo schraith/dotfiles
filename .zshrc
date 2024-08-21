@@ -16,6 +16,9 @@ export MNML_INSERT_CHAR="$"
 export MNML_PROMPT=(mnml_git mnml_keymap)
 export MNML_RPROMPT=('mnml_cwd 20')
 
+# Liquibase environment
+export LIQUIBASE_HOME=/opt/homebrew/opt/liquibase/libexec
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -146,3 +149,7 @@ source /opt/homebrew/opt/powerlevel10k/share/powerlevel10k/powerlevel10k.zsh-the
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+# Set TOMCAT_DEPLOY_DIR to directory based on install tomcat version
+export TOMCAT_DEPLOY_DIR=$(find /opt/homebrew/Cellar/tomcat -mindepth 1 -maxdepth 1)
+alias fl-deploy="echo \"Copying factorlab-web/target/factorlab-web.war to $TOMCAT_DEPLOY_DIR/libexec/webapps\" ; cp factorlab-web/target/factorlab-web.war $TOMCAT_DEPLOY_DIR/libexec/webapps"
