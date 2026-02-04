@@ -49,3 +49,10 @@ alias resolve="git add . && git commit --no-edit"
 alias stash="git stash -u"
 alias unstage="git restore --staged ."
 alias wip="commit wip"
+
+# Safeway Coupons
+alias safeway="~/dev/safeway-coupons/safeway-coupons"
+
+# Python private environment (avoid messing up the system install of python)
+alias python_activate="source ~/.venv/bin/activate"
+

@@ -19,11 +19,14 @@ export MNML_RPROMPT=('mnml_cwd 20')
 # Liquibase environment
 export LIQUIBASE_HOME=/opt/homebrew/opt/liquibase/libexec
 
+# Turn off Homebrew hints
+export HOMEBREW_NO_ENV_HINTS=1
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="minimal"
+#ZSH_THEME="powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -78,7 +81,7 @@ export LIQUIBASE_HOME=/opt/homebrew/opt/liquibase/libexec
 HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$DOTFILES
+# ZSH_CUSTOM=$DOTFILES  # Commented out to avoid theme loading issues
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -86,11 +89,12 @@ ZSH_CUSTOM=$DOTFILES
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+# Minimal plugins for faster startup
+plugins=(git)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LC_ALL=en_US.UTF-8
@@ -103,12 +107,12 @@ export LANG=en_US.UTF-8
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# NVM Setup
+# NVM Setup - Eagerly loaded to ensure all Node tools are available
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+
+# Load nvm immediately on shell startup
+[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && source "$(brew --prefix)/opt/nvm/nvm.sh"
+[ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && source "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm"
 
 # Use the correct Java version for FactorLab
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home
@@ -125,11 +129,14 @@ export CATALINA_OPTS="-Xss8m -Dcom.sun.net.ssl.enableECC=false \
 # 1Password CLI settings
 export OP_BIOMETRIC_UNLOCK_ENABLED=true
 export OP_ACCOUNT=Factorlab
-export OP_PLUGIN_ALIASES_SOURCED=1
-alias aws="op plugin run -- aws"
+
+# Set default AWS profile to prod-admin so you don't need to specify --profile with each command
+export AWS_PROFILE=duplo-prod-admin
+# Disable CLI pager for AWS commands so output is always displayed in the terminal
+export AWS_PAGER=""
 
 # Set private environment variables, which should not be included in source control
-[[ ! -f ~/.private.zsh ]] || source ~/.private.zsh 
+[[ ! -f ~/.private.zsh ]] || source ~/.private.zsh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -141,15 +148,51 @@ alias aws="op plugin run -- aws"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source $DOTFILES/aliases.zsh
 
-source /opt/homebrew/opt/powerlevel10k/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+# Load Angular CLI autocompletion if ng is available
+if command -v ng > /dev/null 2>&1; then
+    source <(ng completion script 2>/dev/null) || true
+fi
 
 # Set TOMCAT_DEPLOY_DIR to directory based on install tomcat version
-export TOMCAT_DEPLOY_DIR=$(find /opt/homebrew/Cellar/tomcat -mindepth 1 -maxdepth 1)
+# export TOMCAT_DEPLOY_DIR=$(find /opt/homebrew/Cellar/tomcat -mindepth 1 -maxdepth 1)
+export TOMCAT_DEPLOY_DIR=/opt/homebrew/opt/tomcat@10
 alias fl-deploy="echo \"Copying factorlab-web/target/factorlab-web.war to $TOMCAT_DEPLOY_DIR/libexec/webapps\" ; cp factorlab-web/target/factorlab-web.war $TOMCAT_DEPLOY_DIR/libexec/webapps"
+
+# Set Python environment to non-system-wide (avoid impacting Homebrew)
+# Only activate if we're in a Python project or if venv exists
+if [[ -f ~/.venv/bin/activate ]] && [[ -f "$(pwd)/requirements.txt" || -f "$(pwd)/setup.py" || -f "$(pwd)/pyproject.toml" || -f "$(pwd)/Pipfile" ]]; then
+    source ~/.venv/bin/activate
+fi
+
+# Added by Windsurf
+export PATH="/Users/kevinschraith/.codeium/windsurf/bin:$PATH"
+
+# GPG Signing for BitBucket needs this
+export GPG_TTY=$(tty)
+
+
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+alias pip='pip3'
+
+# bun completions
+[ -s "/Users/kevinschraith/.bun/_bun" ] && source "/Users/kevinschraith/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+
+
+# Set JAVA_HOME to Amazon Corretto 17 used by builds
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home
+export PATH="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home/bin:/Users/kevinschraith/.bun/bin:/Users/kevinschraith/.codeium/windsurf/bin:/Users/kevinschraith/.bun/bin:/Users/kevinschraith/.codeium/windsurf/bin:/Users/kevinschraith/.nvm/versions/node/v18.20.8/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Library/TeX/texbin:/Users/kevinschraith/.local/bin:/Users/kevinschraith/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand"
+export PATH="/opt/homebrew/opt/tomcat@10/bin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
