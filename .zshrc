@@ -161,7 +161,8 @@ fi
 # Set TOMCAT_DEPLOY_DIR to directory based on install tomcat version
 # export TOMCAT_DEPLOY_DIR=$(find /opt/homebrew/Cellar/tomcat -mindepth 1 -maxdepth 1)
 export TOMCAT_DEPLOY_DIR=/opt/homebrew/opt/tomcat@10
-alias fl-deploy="echo \"Copying factorlab-web/target/factorlab-web.war to $TOMCAT_DEPLOY_DIR/libexec/webapps\" ; cp factorlab-web/target/factorlab-web.war $TOMCAT_DEPLOY_DIR/libexec/webapps"
+#alias fl-deploy="echo \"Copying factorlab-web/target/factorlab-web.war to $TOMCAT_DEPLOY_DIR/libexec/webapps\" ; cp factorlab-web/target/factorlab-web.war $TOMCAT_DEPLOY_DIR/libexec/webapps"
+alias fl-deploy="echo \"Copying factorlab-web/target/factorlab-web to $TOMCAT_DEPLOY_DIR/libexec/webapps\" ; cp -r factorlab-web/target/factorlab-web $TOMCAT_DEPLOY_DIR/libexec/webapps"
 
 # Set Python environment to non-system-wide (avoid impacting Homebrew)
 # Only activate if we're in a Python project or if venv exists
@@ -196,3 +197,13 @@ export PATH="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/H
 export PATH="/opt/homebrew/opt/tomcat@10/bin:$PATH"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+
+# opencode
+export PATH=/Users/kevinschraith/.opencode/bin:$PATH
+
+export PATH=/Users/kevinschraith/bin:$PATH
+
+[[ -e "/Users/kevinschraith/lib/oracle-cli/lib/python3.14/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/Users/kevinschraith/lib/oracle-cli/lib/python3.14/site-packages/oci_cli/bin/oci_autocomplete.sh"
+
+# MySQL 8.0 client (for mysql_native_password support)
+export PATH="/opt/homebrew/opt/mysql-client@8.0/bin:$PATH"
